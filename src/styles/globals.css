@@ -1,0 +1,19 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.h1 {
+  font-family: 'Mina', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 80px;
+  letter-spacing: -1.5px;
+}
+
+.roboto {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 80px;
+  letter-spacing: -1.5px;
+}
