@@ -1,10 +1,8 @@
 import 'styled-components'
-import { ColorFormat } from './colors/interfaces'
-import { FontFormat } from './fonts/interfaces'
+import { ColorFormat } from './colors'
 
 export interface ThemeType {
   COLORS: ColorFormat
-  FONTS: FontFormat
 }
 
 declare module 'styled-components' {
