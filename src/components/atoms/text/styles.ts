@@ -1,7 +1,16 @@
 import styled, { css } from 'styled-components'
 import { IText } from './index'
 
-export const typeMapper = {
+type TextType = 'headline-1' | 'headline-2' | 'subtitle-1' | 'body-1'
+
+interface TypeMapper {
+  [key: string]: {
+    as: keyof JSX.IntrinsicElements
+    textFormat: ReturnType<typeof css>
+  }
+}
+
+export const typeMapper: TypeMapper = {
   'headline-1': {
     as: 'h1',
     textFormat: css`
@@ -47,10 +56,10 @@ export const typeMapper = {
   }
 }
 
-export const TextComponent = styled.span.attrs<IText>(({ type }) => ({
-  as: typeMapper[type]?.as
-}))<IText>`
-  ${({ type }) => typeMapper[type]?.textFormat}
+const getTextComponent = (type: TextType) => styled(typeMapper[type].as)<IText>`
+  ${typeMapper[type].textFormat}
   color: ${({ color, theme }) =>
     color ? theme.COLORS[color] : theme.COLORS.PRIMARY};
 `
+
+export default getTextComponent

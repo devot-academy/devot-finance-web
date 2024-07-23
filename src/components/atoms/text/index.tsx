@@ -1,14 +1,16 @@
 import React from 'react';
-import * as Style from './styles';
-import { typeMapper } from './styles';
+import getTextComponent from './styles';
 import { ColorFormat } from '../../../styles/theme/colors';
 
+type TextType = 'headline-1' | 'headline-2' | 'subtitle-1' | 'body-1';
+
 export interface IText {
-  type: keyof typeof typeMapper;
+  type: TextType;
   color?: keyof ColorFormat;
   children: React.ReactNode;
 }
 
 export default function Text(props: IText) {
-  return <Style.TextComponent {...props} />;
+  const Component = getTextComponent(props.type);
+  return <Component {...props}>{props.children}</Component>;
 }
