@@ -1,18 +1,11 @@
 import styled, { css } from 'styled-components'
-import { IText } from './index'
+import { ITextProps } from './index'
 
-type TextType = 'headline-1' | 'headline-2' | 'subtitle-1' | 'body-1'
+export type IType = keyof typeof typeMapper;
+type ITextComponent = Omit<ITextProps, 'children'>
 
-interface TypeMapper {
-  [key: string]: {
-    as: keyof JSX.IntrinsicElements
-    textFormat: ReturnType<typeof css>
-  }
-}
-
-export const typeMapper: TypeMapper = {
+export const typeMapper = {
   'headline-1': {
-    as: 'h1',
     textFormat: css`
       font-family: ${props => props.theme.FONTS.HEADING};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.BOLD};
@@ -23,7 +16,6 @@ export const typeMapper: TypeMapper = {
     `
   },
   'headline-2': {
-    as: 'h2',
     textFormat: css`
       font-family: ${props => props.theme.FONTS.BODY};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.BOLD};
@@ -34,7 +26,6 @@ export const typeMapper: TypeMapper = {
     `
   },
   'subtitle-1': {
-    as: 'p',
     textFormat: css`
       font-family: ${props => props.theme.FONTS.BODY};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.MEDIUM};
@@ -44,7 +35,6 @@ export const typeMapper: TypeMapper = {
     `
   },
   'body-1': {
-    as: 'p',
     textFormat: css`
       font-family: ${props => props.theme.FONTS.BODY};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.REGULAR};
@@ -56,10 +46,10 @@ export const typeMapper: TypeMapper = {
   }
 }
 
-const getTextComponent = (type: TextType) => styled(typeMapper[type].as)<IText>`
-  ${typeMapper[type].textFormat}
+export const TextComponent = styled.p<ITextComponent>` 
+  ${({ type }) => typeMapper[type].textFormat}
   color: ${({ color, theme }) =>
     color ? theme.COLORS[color] : theme.COLORS.PRIMARY};
 `
 
-export default getTextComponent
+ 
