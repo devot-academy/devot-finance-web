@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Text from '../../components/atoms/text';
+import Button from '../../components/molecules/button';
 
 const Container = styled.div`
   display: flex;
@@ -23,11 +24,14 @@ export default function Login() {
         Roboto 700
       </Text>
       <Text type="subtitle-1" color="SECONDARY">
-       Roboto 500
+        Roboto 500
       </Text>
       <Text type="body-1" color="SECONDARY">
         Roboto 400
-      </Text>
+        </Text>
+      <Button>
+        Botão
+      </Button>
     </Container>
   );
 }
