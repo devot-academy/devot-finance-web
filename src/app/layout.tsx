@@ -1,12 +1,12 @@
 'use client'
 
-import type { Metadata } from "next";
 import { Mina, Roboto } from 'next/font/google';
 import { ThemeProvider } from 'styled-components'
 
 import { theme } from '../styles/theme'
+import { GlobalStyles } from '../styles/globals'
  
-const mina = Mina({
+const mina = Mina({ 
   weight: '700',
   subsets: ['latin'],
   display: 'swap',
@@ -31,6 +31,7 @@ export default function RootLayout({
           {children}
         </ThemeProvider>
       </body>
+      <GlobalStyles />
     </html>
   );
 }

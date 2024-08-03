@@ -10,7 +10,6 @@ export const typeMapper = {
       font-family: ${props => props.theme.FONTS.HEADING};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.BOLD};
       font-size: 32px;
-      line-height: 80px;
       letter-spacing: -1.5px;
       text-align: left;
     `
@@ -20,7 +19,6 @@ export const typeMapper = {
       font-family: ${props => props.theme.FONTS.BODY};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.BOLD};
       font-size: 40px;
-      line-height: 80px;
       letter-spacing: -1.5px;
       text-align: left;
     `
@@ -29,7 +27,6 @@ export const typeMapper = {
     textFormat: css`
       font-family: ${props => props.theme.FONTS.BODY};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.MEDIUM};
-      font-size: 16px;
       line-height: 18.75px;
       text-align: left;
     `
@@ -39,7 +36,6 @@ export const typeMapper = {
       font-family: ${props => props.theme.FONTS.BODY};
       font-weight: ${props => props.theme.FONTS.FONT_WEIGHTS.REGULAR};
       font-size: 32px;
-      line-height: 80px;
       letter-spacing: -1.5px;
       text-align: left;
     `
