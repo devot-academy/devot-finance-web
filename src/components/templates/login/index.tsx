@@ -1,9 +1,9 @@
 import React from 'react'
 import * as S from './styles'
 
-import Icon from '../atoms/icon'
-import Text from '../atoms/text'
-import Button from '../molecules/button'
+import Icon from '../../atoms/icon'
+import Text from '../../atoms/text'
+import Button from '../../molecules/button'
 
 export default function LoginTemplate() {
     return <S.Container>
