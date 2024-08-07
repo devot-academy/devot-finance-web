@@ -1,9 +1,9 @@
 import React from 'react'
 import * as S from './styles'
-
 import Icon from '../../atoms/icon'
 import Text from '../../atoms/text'
 import Button from '../../molecules/button'
+import Link from 'next/link'
 
 export default function LoginTemplate() {
     return <S.Container>
@@ -24,7 +24,9 @@ export default function LoginTemplate() {
             </S.Form>
             <S.CreateAccountContent>
                 <Text type='body-1' color='PRIMARY'>Não tem um conta?</Text>
-                <Text type='body-1' color='PRIMARY'>TODO</Text>
+                <Link href="/outra-pagina">
+                 criar conta
+                </Link>
             </S.CreateAccountContent>
         </S.FormContent>
         <S.LogoContent>
