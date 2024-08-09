@@ -10,7 +10,7 @@ export type ILinkProps = ITextProps & {
 export default function LinkText({ href, children, ...rest }: ILinkProps) {
   return (
     <Link href={href} passHref>
-      <S.LinkComponent {...rest}>{children}</S.LinkComponent>
+      <S.LinkComponent {...rest} type='headline-1'>{children}</S.LinkComponent>
     </Link>
   );
 }
