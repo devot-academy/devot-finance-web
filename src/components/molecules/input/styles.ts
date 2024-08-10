@@ -18,8 +18,8 @@ export const InputField = styled.input`
   border-radius: 0.625rem;
   border: 0.125rem solid ${({ theme }) => theme.COLORS.PRIMARY};
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
-  padding: 0.5rem;
-  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1.5rem;
   color: ${({ theme }) => theme.COLORS.TEXT};
   opacity: 1;
 

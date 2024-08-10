@@ -7,8 +7,13 @@ import Link from '../../molecules/link';
 import Input from '../../molecules/input';
 
 export default function LoginTemplate() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [form, setForm] = useState({ email: "", password: "" })
+
+    const handleSubmit = () => {
+        const { email, password } = form;
+        if (email === "" || password === "") alert("Error Campos não preenchido")
+        console.log({ email, password })
+    }
 
     return (
         <S.Container>
@@ -26,10 +31,13 @@ export default function LoginTemplate() {
                             <Text type='body-1' color='PRIMARY'>E-mail</Text>
                         </S.Label>
                         <Input 
-                            type="text" 
-                            placeholder="" 
-                            value={username}
-                            onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setUsername(e.target.value)}
+                            type="email" 
+                            placeholder="Digite seu e-email" 
+                            value={form.email}
+                            onChange={(value) => setForm({
+                                ...form,
+                                email: value,
+                            })}
                         />
                     </S.InputContent>
                     <S.InputContent>
@@ -38,13 +46,16 @@ export default function LoginTemplate() {
                         </S.Label>
                         <Input 
                             type="password" 
-                            placeholder="" 
-                            value={password}
-                            onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => setPassword(e.target.value)}
+                            placeholder="Digite sua senha" 
+                            value={form.password}
+                            onChange={(value) => setForm({
+                                ...form,
+                                password: value,
+                            })}
                         />
                     </S.InputContent>
                     <S.ButtonContent>
-                        <Button>ENTRAR</Button>
+                        <Button onClick={handleSubmit}>ENTRAR</Button>
                     </S.ButtonContent>
                 </S.Form>
                 <S.CreateAccountContent>
