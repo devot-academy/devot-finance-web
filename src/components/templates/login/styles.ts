@@ -11,7 +11,7 @@ export const Container = styled.div`
 `
 
 export const FormContent = styled.div`
-  border-radius: 1.875rem; /* 30px */
+  border-radius: 1.875rem;
   padding: 3.5rem 13.4rem;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
   display: flex;
@@ -59,7 +59,7 @@ export const LogoContent = styled.div`
   position: absolute;
   bottom: 0;
   right: 0;
-  margin: 0.4375rem 1.875rem; /* 0.7rem 3rem */
+  margin: 0.4375rem 1.875rem;
   display: flex;
 `
 

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import * as S from './styles';
 import Icon from '../../atoms/icon';
 import Text from '../../atoms/text';
+import Input from '../../atoms/input';
 import Button from '../../molecules/button';
 import Link from '../../molecules/link';
-import Input from '../../molecules/input';
 
 export default function LoginTemplate() {
     const [form, setForm] = useState({ email: "", password: "" })
@@ -60,7 +60,7 @@ export default function LoginTemplate() {
                 </S.Form>
                 <S.CreateAccountContent>
                     <Text type='body-1' color='PRIMARY'>Não tem um conta?</Text>
-                    <Link href="/outra-pagina" type="headline-1">
+                    <Link href="/createAccount" type="headline-1">
                         Criar conta
                     </Link>                
                 </S.CreateAccountContent>
