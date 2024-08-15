@@ -1,7 +1,6 @@
 'use client'
 import styled from 'styled-components';
 import React from 'react';
-import SideBar from '../../components/organisms/sideBar';
 
 const Container = styled.div`
   width: 100dvw;
@@ -9,10 +8,12 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: red;
 `
 
 export default function Test() {
   return <Container>
-      <SideBar />
+    opa
+
   </Container>;
 }
