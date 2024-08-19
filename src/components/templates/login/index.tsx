@@ -23,7 +23,7 @@ export default function LoginTemplate() {
                     <Text type='headline-1' color='PRIMARY'>FINANCE DEVOT</Text>
                 </S.FinanceLogoContent>
                 <S.Title>
-                    <Text type='body-1' color='PRIMARY'>Login</Text>
+                    <Text type='headline-1' color='PRIMARY'>Login</Text>
                 </S.Title>
                 <S.Form>
                     <S.InputContent>

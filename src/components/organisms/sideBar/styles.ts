@@ -7,32 +7,33 @@ export const Container = styled.div`
   width: 15vw;
   height: 100vh;
   background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-  padding: 2rem;
+  padding: 3rem;
 `
 
 export const TopContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 3rem;
+  gap: 4rem;
 `
 
 export const NavMenu = styled.div`
-  margin-top: -55rem;
+  margin-top: -40rem;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 `
 
 export const MenuItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
   cursor: pointer;
 
   &:hover {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY_HOVER};
     border-radius: 0.25rem;
+    padding: 0.75rem;
   }
 `
 
@@ -45,5 +46,5 @@ export const LinkContent = styled.div`
 export const IconTextContent = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
 `
