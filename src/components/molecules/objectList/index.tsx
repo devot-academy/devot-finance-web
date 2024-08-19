@@ -17,7 +17,7 @@ export default function List({title, value, color="BACKGROUND"}: IlistProps) {
   return (
     <S.ListComponent color={color}>
         <S.Content>
-            <Icon name='trash' size='small' color='PRIMARY'/>
+            <Icon name='trash' size='small' color='PRIMARY' />
             <Text type="body-1" color="GREEN">{title}</Text>
         </S.Content>
         <Text type= 'body-1' color="GREEN">{value}</Text>
