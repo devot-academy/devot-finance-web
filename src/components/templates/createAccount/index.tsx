@@ -35,7 +35,7 @@ export default function CreateAccountTemplate() {
                     <Text type='headline-1' color='PRIMARY'>FINANCE DEVOT</Text>
                 </S.FinanceLogoContent>
                 <S.Title>
-                    <Text type='body-1' color='PRIMARY'>Criação de Conta</Text>
+                    <Text type='headline-1' color='PRIMARY'>Criação de Conta</Text>
                 </S.Title>
                 <S.Form>
                     <S.InputContent>
