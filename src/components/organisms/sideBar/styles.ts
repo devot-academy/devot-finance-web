@@ -4,36 +4,36 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 15vw;
+  width: 20vw;
   height: 100vh;
   background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-  padding: 3rem;
+  padding: 2rem;
 `
 
 export const TopContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 4rem;
+  gap: 3rem;
 `
 
 export const NavMenu = styled.div`
-  margin-top: -40rem;
+  margin-top: -30rem;
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1rem;
 `
 
 export const MenuItem = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
   cursor: pointer;
 
   &:hover {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY_HOVER};
     border-radius: 0.25rem;
-    padding: 0.75rem;
+    padding: 0.5rem;
   }
 `
 
@@ -46,5 +46,5 @@ export const LinkContent = styled.div`
 export const IconTextContent = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.5rem;
 `
