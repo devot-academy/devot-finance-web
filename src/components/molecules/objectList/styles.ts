@@ -11,9 +11,12 @@ export const ListComponent= styled.div`
   align-items: center;
 
 `
-
 export const Content = styled.div`
     display: flex;
     align-items: center;
+
+`
+export const Button = styled.div`
+  cursor: pointer;
 
 `

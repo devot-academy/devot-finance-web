@@ -8,6 +8,7 @@ export interface ICardProps {
   title: string;
   value: string;
   color?: keyof ColorFormat;
+  
 }
 
 export default function Card({title, value, color="GREEN"}: ICardProps) {
