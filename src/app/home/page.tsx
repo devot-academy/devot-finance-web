@@ -8,12 +8,10 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: red;
+  background-color: white;
 `
 
 export default function Test() {
   return <Container>
-    opa
-
-  </Container>;
+        </Container>;
 }

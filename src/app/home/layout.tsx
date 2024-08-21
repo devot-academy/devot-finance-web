@@ -20,9 +20,8 @@ export default function RootLayout({
  
 
   return <Container>
-         {children}
-      <SideBar />
- 
+          <SideBar />
+         {children} 
   </Container>;
 }
  
