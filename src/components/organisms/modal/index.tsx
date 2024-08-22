@@ -29,8 +29,8 @@ const Modal: React.FC<ModalProps> = ({ isVisible, title, onClose }) => {
         />
         <Text type={'headline-1'}>Valor mensal (R$)</Text>
         <Input 
-          type="text" 
-          placeholder="" 
+          type="currency" 
+          placeholder="R$" 
           onChange={(value) => console.log('Valor mensal:', value)} 
         />        
         <S.ButtonContent>
