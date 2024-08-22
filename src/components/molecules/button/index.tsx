@@ -4,8 +4,13 @@ import * as S from './styles';
 export interface IButtonProps {
   children: React.ReactNode;
   onClick: () => void;
+  variant?: 'default' | 'cancel' | 'danger';
 }
 
-export default function Button({ children, onClick = () => {}, ...rest }: IButtonProps) {
-  return <S.ButtonComponent {...rest} onClick={onClick}>{children}</S.ButtonComponent>;
+export default function Button({ children, onClick = () => {}, variant = 'default', ...rest }: IButtonProps) {
+  return (
+    <S.ButtonComponent variant={variant} onClick={onClick} {...rest}>
+      {children}
+    </S.ButtonComponent>
+  );
 }
