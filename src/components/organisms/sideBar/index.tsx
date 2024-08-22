@@ -29,12 +29,12 @@ export default function SideBar() {
                 </Text>
             </S.TopContent>
             <S.NavMenu>
-                <S.MenuItem onClick={() => handleMenuItemClick('Finanças')}>
+                <S.MenuIcon>
                     <Icon name="menu" size="small" color="BACKGROUND" />
                     <Text type="body-1" color="BACKGROUND">
                         Finanças
                     </Text>
-                </S.MenuItem>
+                </S.MenuIcon>
                 <S.MenuItem onClick={() => handleMenuItemClick('Nova entrada')}>
                     <Icon name="plus" size="small" color="BACKGROUND" />
                     <Text type="body-1" color="BACKGROUND">
