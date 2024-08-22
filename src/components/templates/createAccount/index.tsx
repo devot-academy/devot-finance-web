@@ -31,7 +31,7 @@ export default function CreateAccountTemplate() {
         <S.Container>
             <S.FormContent>
                 <S.FinanceLogoContent>
-                    <Icon name='logo' size='large' color='PRIMARY' />
+                    <Icon name='logo' size='medium' color='PRIMARY' />
                     <Text type='headline-1' color='PRIMARY'>FINANCE DEVOT</Text>
                 </S.FinanceLogoContent>
                 <S.Title>
