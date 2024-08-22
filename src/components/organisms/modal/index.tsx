@@ -14,7 +14,7 @@ const Modal: React.FC<ModalProps> = ({ isVisible, title, onClose }) => {
   if (!isVisible) return null;
 
   return (
-    <S.ModalOverlay onClick={onClose}>
+    <S.ModalOverlay>
       <S.ModalContainer>
         <S.ModalTitle>
           <Text type={'headline-2'}>
@@ -34,10 +34,10 @@ const Modal: React.FC<ModalProps> = ({ isVisible, title, onClose }) => {
           onChange={(value) => console.log('Valor mensal:', value)} 
         />        
         <S.ButtonContent>
-          <Button onClick={onClose}>
+          <Button variant='cancel' onClick={onClose}>
             Cancelar
           </Button>
-          <Button onClick={() => console.log('Adicionando entrada...')}>
+          <Button variant='default' onClick={() => console.log('Adicionando entrada...')}>
             Adicionar
           </Button>
         </S.ButtonContent>

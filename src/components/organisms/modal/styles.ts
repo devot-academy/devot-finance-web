@@ -1,6 +1,4 @@
 import styled from 'styled-components'
-import Button from '../../molecules/button'
-import Input from '../../atoms/input'
 
 export const ModalOverlay = styled.div`
   position: fixed;
@@ -41,32 +39,9 @@ export const ModalTitle = styled.h2`
   margin-bottom: 2rem;
 `
 
-export const InputField = styled(Input)`
-  width: 100%;
-  margin-bottom: 1.5rem;
-  padding: 0.75rem;
-  border: 0.0625rem solid ${({ theme }) => theme.COLORS.PRIMARY};
-  border-radius: 0.25rem;
-  flex-grow: 1;
-`
-
 export const ButtonContent = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   margin-top: 1.5rem;
-`
-
-export const CancelButton = styled(Button)`
-  width: 100%;
-  background-color: ${({ theme }) => theme.COLORS.CANCEL};
-  color: ${({ theme }) => theme.COLORS.BACKGROUND};
-  padding: 0.75rem 1rem;
-`
-
-export const ConfirmButton = styled(Button)`
-  width: 100%;
-  background-color: ${({ theme }) => theme.COLORS.PRIMARY};
-  color: ${({ theme }) => theme.COLORS.BACKGROUND};
-  padding: 0.75rem 1rem;
 `
