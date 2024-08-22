@@ -1,23 +1,53 @@
 import React, { useState } from 'react';
-import { InputField } from './styles';
+import * as S from './styles';
 
-export type IInput = {
-  type: 'password' | 'text' | 'email';
+export interface IInputProps {
+  type?: 'password' | 'text' | 'email' | 'number' | 'currency';
   placeholder: string;
   value?: string;
-  onChange: (arg0: string) => void;
-};
-
-function Input({ value = "", onChange, ...rest}: IInput) {
-  const [currentValue, setCurrentValue] = useState(value)
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = e.target
-    setCurrentValue(value)
-    onChange && onChange(value)
-  }
-
-  return <InputField {...rest} onChange={handleChange} value={currentValue} />
+  onChange: (value: string) => void;
+  [key: string]: any;
 }
 
-export default Input;
+function formatCurrency(value: string): string {
+  const numericValue = value.replace(/\D/g, '');
+  if (!numericValue) return '';
+  const formattedValue = new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL',
+  }).format(parseFloat(numericValue) / 100);
+  return formattedValue;
+}
+
+export default function Input({
+  value = '',
+  onChange,
+  type = 'text',
+  ...rest
+}: IInputProps) {
+  const [currentValue, setCurrentValue] = useState(
+    type === 'currency' && value ? formatCurrency(value) : value
+  );
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    let inputValue = e.target.value;
+
+    if (type === 'number') {
+      if (!/^\d*$/.test(inputValue)) return;
+    } else if (type === 'currency') {
+      inputValue = formatCurrency(inputValue);
+    }
+
+    setCurrentValue(inputValue);
+    onChange(inputValue);
+  };
+
+  return (
+    <S.InputField
+      {...rest}
+      type={type === 'currency' ? 'text' : type}
+      value={currentValue}
+      onChange={handleChange}
+    />
+  );
+}
