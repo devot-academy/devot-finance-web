@@ -4,7 +4,7 @@ import * as S from './styles';
 export interface IButtonProps {
   children: React.ReactNode;
   onClick: () => void;
-  variant?: 'default' | 'cancel' | 'danger';
+  variant?: 'default' | 'cancel' | 'danger' | 'disabled';
 }
 
 export default function Button({ children, onClick = () => {}, variant = 'default', ...rest }: IButtonProps) {

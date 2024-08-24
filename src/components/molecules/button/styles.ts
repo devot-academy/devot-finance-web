@@ -33,4 +33,11 @@ export const ButtonComponent = styled.button<IButtonProps>`
       background-color: ${props.theme.COLORS.DANGER};
       color: ${props.theme.COLORS.BACKGROUND};
     `}
+
+  ${props =>
+    props.variant === 'disabled' &&
+    css`
+      background-color: ${props.theme.COLORS.SECONDARY};
+      color: ${props.theme.COLORS.BACKGROUND};
+  `}
 `

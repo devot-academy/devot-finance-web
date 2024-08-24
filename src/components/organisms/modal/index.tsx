@@ -1,17 +1,45 @@
-import React from 'react';
+import React, { forwardRef, Ref, useState, useImperativeHandle } from 'react';
 import * as S from './styles';
 import Text from '../../atoms/text';
 import Input from '../../atoms/input';
 import Button from '../../molecules/button';
 
-interface ModalProps {
-  isVisible: boolean;
-  title: string;
-  onClose: () => void;
+export type IModalRef = {
+  stateModal: boolean;
+  onToggle: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ isVisible, title, onClose }) => {
-  if (!isVisible) return null;
+type IModalProps = {
+  title: string;
+  onSubmit: (form: { description: string; value: string; } ) => void;
+}
+
+const Modal = forwardRef(function ModalForward({ title, onSubmit }: IModalProps, ref: Ref<IModalRef>) {
+  const [toggle, setToggle] = useState(false)
+  const [form, setForm] = useState({ 
+    description: '',
+    value: ''
+  })
+
+  function handleToggle () {
+    setToggle(curr => !curr)
+  }
+
+  function handleSubmit () {
+    onSubmit && onSubmit(form)
+    if (validation) handleToggle()
+  }
+
+  const validation = form.description !== '' && form.value !== '';
+
+  useImperativeHandle(ref, () => ({
+    stateModal: toggle,
+    onToggle: handleToggle,
+  }), [toggle]
+
+)
+
+  if (!toggle) return null;
 
   return (
     <S.ModalOverlay>
@@ -25,25 +53,25 @@ const Modal: React.FC<ModalProps> = ({ isVisible, title, onClose }) => {
         <Input 
           type="text" 
           placeholder="" 
-          onChange={(value) => console.log('Descrição:', value)} 
+          onChange={(value) => setForm({ ...form, description: value})} 
         />
         <Text type={'headline-1'}>Valor mensal (R$)</Text>
         <Input 
           type="currency" 
           placeholder="R$" 
-          onChange={(value) => console.log('Valor mensal:', value)} 
+          onChange={(value) => setForm({ ...form, value})} 
         />        
         <S.ButtonContent>
-          <Button variant='cancel' onClick={onClose}>
+          <Button variant='cancel' onClick={handleToggle}>
             Cancelar
           </Button>
-          <Button variant='default' onClick={() => console.log('Adicionando entrada...')}>
+          <Button variant={'default'} onClick={handleSubmit}>
             Adicionar
           </Button>
         </S.ButtonContent>
       </S.ModalContainer>
       </S.ModalOverlay>
-  );
-};
+  )
+})
 
 export default Modal;

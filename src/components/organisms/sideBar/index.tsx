@@ -1,22 +1,27 @@
-import React, { useState } from 'react';
+import { useRouter } from 'next/navigation'
+import React from 'react';
 import * as S from './styles';
 import Icon from '../../atoms/icon';
 import Text from '../../atoms/text';
-import LinkText from '../../molecules/link';
-import Modal from '../modal';
 
-export default function SideBar() {
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [modalTitle, setModalTitle] = useState('');
+type IMenuOption = {
+    name: string;
+    onClick: () => void;
+}
 
-    const handleMenuItemClick = (title: string) => {
-        setModalTitle(title);
-        setIsModalVisible(true);
-    };
+export type ISideBarProps = {
+    userName: string;
+    onLogout: () => void;
+    menuOptions: IMenuOption[];
+}
 
-    const closeModal = () => {
-        setIsModalVisible(false);
-    };
+export default function SideBar({ userName, menuOptions = [], onLogout}: ISideBarProps) {
+    const router = useRouter()
+    
+    function handleLogout () {
+        onLogout && onLogout()
+        router.replace('/login')
+    }
 
     return (
         <S.Container>
@@ -25,7 +30,7 @@ export default function SideBar() {
                     FINANCE DEVOT
                 </Text>
                 <Text type="headline-2" color="BACKGROUND">
-                    Allan Paulo
+                    {userName}
                 </Text>
             </S.TopContent>
             <S.NavMenu>
@@ -35,41 +40,23 @@ export default function SideBar() {
                         Finanças
                     </Text>
                 </S.MenuIcon>
-                <S.MenuItem onClick={() => handleMenuItemClick('Nova entrada')}>
-                    <Icon name="plus" size="small" color="BACKGROUND" />
-                    <Text type="body-1" color="BACKGROUND">
-                        Nova entrada
-                    </Text>
-                </S.MenuItem>
-                <S.MenuItem onClick={() => handleMenuItemClick('Nova despesa essencial')}>
-                    <Icon name="plus" size="small" color="BACKGROUND" />
-                    <Text type="body-1" color="BACKGROUND">
-                        Nova despesa essencial
-                    </Text>
-                </S.MenuItem>
-                <S.MenuItem onClick={() => handleMenuItemClick('Nova despesa não essencial')}>
-                    <Icon name="plus" size="small" color="BACKGROUND" />
-                    <Text type="body-1" color="BACKGROUND">
-                        Nova despesa não essencial
-                    </Text>
-                </S.MenuItem>
+                {menuOptions.map(({ name, onClick }, index) => 
+                    <S.MenuItem key={index} onClick={onClick}>
+                        <Icon name="plus" size="small" color="BACKGROUND" />
+                        <Text type="body-1" color="BACKGROUND">
+                           {name}
+                        </Text>
+                    </S.MenuItem>
+                )}
             </S.NavMenu>
             <S.LinkContent>
-                <LinkText href='/login' type='body-1' color='BACKGROUND'>
-                    <S.IconTextContent>
-                        <Icon name="exit" size="small" color="BACKGROUND" />
-                        <Text type="body-1" color="BACKGROUND">
-                            Sair
-                        </Text>
-                    </S.IconTextContent>
-                </LinkText>
+                <S.IconTextContent onClick={handleLogout}>
+                    <Icon name="exit" size="small" color="BACKGROUND" />
+                    <Text type="body-1" color="BACKGROUND">
+                        Sair
+                    </Text>
+                </S.IconTextContent>
             </S.LinkContent>
-
-            <Modal
-                isVisible={isModalVisible}
-                title={modalTitle}
-                onClose={closeModal}
-            />
         </S.Container>
     );
 }
