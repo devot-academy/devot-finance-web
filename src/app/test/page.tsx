@@ -45,26 +45,41 @@ function onClick(){
   console.log('Clicou!')
 }
 
+function aplicaMoeda(value: number):string {
+  const formatter= new Intl.NumberFormat('pt-BR', {
+    style:'currency',
+    currency:'BRL',
+    minimumFractionDigits: 2
+
+  });
+    const FormattedValue= formatter.format(Math.abs(value));
+    const sign = value >= 0 ? '+' : '-';
+    return`${sign} ${FormattedValue}`;
+
+}
+
+
 export default function test() {
+
   return (
     <MainContainer>
       <LeftContainer>
-        <Card title="Entradas" value="R$1.700,00" color="GREEN" />
-        <List title="Salário" value="R$1.200,00"  onClick={onClick}/>
-        <List title="Vale-alimentação" value="+R$500,00" onClick={onClick} />
-        <List title='Saldo' value="R$1.100,00"  onClick={onClick}/>
+        <Card title="Entradas" value={aplicaMoeda(1700.00)} color="GREEN" />
+        <List title="Salário" value={aplicaMoeda(1200.00)} onClick={onClick}/>
+        <List title="Vale-alimentação" value={aplicaMoeda(500.00)} onClick={onClick} />
+        <List title='Saldo' value={aplicaMoeda(1100.00)}  onClick={onClick}/>
       </LeftContainer>
       <RightContainer>
-        <Card title="Despesas Essencial" value="R$150,00" color='ROSELLA' />
-        <List title="Luz" value="-R$100,00" onClick={onClick} />
-        <List title="Água" value="-R$50,00" onClick={onClick}/>
-        <Card title='Despesas Não Essencial' value="R$400,00" color='FANDANGO' />
-        <List title="Lazer" value="-R$400,00" onClick={onClick}/>
-        <List title='Canais de Stremens' value="-R$50,00"onClick={onClick} />
-        <Card title='Total de Despesas' value="R$600,00" color='ROSELLA' />
+        <Card title="Despesas Essencial" value={aplicaMoeda(150.00)} color='ROSELLA' />
+        <List title="Luz" value={aplicaMoeda(-100.00)} onClick={onClick} />
+        <List title="Água" value={aplicaMoeda(-50.00)} onClick={onClick}/>
+        <Card title='Despesas Não Essencial' value={aplicaMoeda(400.00 )}color='FANDANGO' />
+        <List title="Lazer" value={aplicaMoeda(-400.00)}onClick={onClick}/>
+        <List title='Canais de Stremens' value={aplicaMoeda(-50.00) }onClick={onClick} />
+        <Card title='Total de Despesas' value={aplicaMoeda(600.00)} color='ROSELLA' />
       </RightContainer>
       <BottomCardContainer>
-        <Card title="Reserva de Emergencia Ideal" value="R$7.200,00" color="PRIMARY" />
+        <Card title="Reserva de Emergencia Ideal" value={aplicaMoeda(7200.00 )}color="PRIMARY" />
       </BottomCardContainer>
     </MainContainer>
   );
