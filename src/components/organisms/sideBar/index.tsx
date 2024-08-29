@@ -1,10 +1,28 @@
+import { useRouter } from 'next/navigation'
 import React from 'react';
 import * as S from './styles';
 import Icon from '../../atoms/icon';
 import Text from '../../atoms/text';
-import LinkText from '../../molecules/link';
 
-export default function SideBar() {
+type IMenuOption = {
+    name: string;
+    onClick: () => void;
+}
+
+export type ISideBarProps = {
+    userName: string;
+    onLogout: () => void;
+    menuOptions: IMenuOption[];
+}
+
+export default function SideBar({ userName, menuOptions = [], onLogout}: ISideBarProps) {
+    const router = useRouter()
+    
+    function handleLogout () {
+        onLogout && onLogout()
+        router.replace('/login')
+    }
+
     return (
         <S.Container>
             <S.TopContent>
@@ -12,45 +30,33 @@ export default function SideBar() {
                     FINANCE DEVOT
                 </Text>
                 <Text type="headline-2" color="BACKGROUND">
-                    Allan Paulo
+                    {userName}
                 </Text>
             </S.TopContent>
             <S.NavMenu>
-                <S.MenuItem>
+                <S.MenuIcon>
                     <Icon name="menu" size="small" color="BACKGROUND" />
                     <Text type="body-1" color="BACKGROUND">
                         Finanças
                     </Text>
-                </S.MenuItem>
-                <S.MenuItem>
-                    <Icon name="plus" size="small" color="BACKGROUND" />
-                    <Text type="body-1" color="BACKGROUND">
-                        Nova entrada
-                    </Text>
-                </S.MenuItem>
-                <S.MenuItem>
-                    <Icon name="plus" size="small" color="BACKGROUND" />
-                    <Text type="body-1" color="BACKGROUND">
-                        Nova despesa essencial
-                    </Text>
-                </S.MenuItem>
-                <S.MenuItem>
-                    <Icon name="plus" size="small" color="BACKGROUND" />
-                    <Text type="body-1" color="BACKGROUND">
-                        Nova despesa não essencial
-                    </Text>
-                </S.MenuItem>
+                </S.MenuIcon>
+                {menuOptions.map(({ name, onClick }, index) => 
+                    <S.MenuItem key={index} onClick={onClick}>
+                        <Icon name="plus" size="small" color="BACKGROUND" />
+                        <Text type="body-1" color="BACKGROUND">
+                           {name}
+                        </Text>
+                    </S.MenuItem>
+                )}
             </S.NavMenu>
             <S.LinkContent>
-                <LinkText href='#' type='body-1' color='BACKGROUND'>
-                    <S.IconTextContent>
-                        <Icon name="exit" size="small" color="BACKGROUND" />
-                        <Text type="body-1" color="BACKGROUND">
-                            Sair
-                        </Text>
-                    </S.IconTextContent>
-                </LinkText>
+                <S.IconTextContent onClick={handleLogout}>
+                    <Icon name="exit" size="small" color="BACKGROUND" />
+                    <Text type="body-1" color="BACKGROUND">
+                        Sair
+                    </Text>
+                </S.IconTextContent>
             </S.LinkContent>
-        </S.Container> 
+        </S.Container>
     );
 }

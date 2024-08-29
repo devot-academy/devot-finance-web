@@ -8,6 +8,7 @@ export type ColorFormat = {
   ROSELLA: string
   FANDANGO: string
   CANCEL: string
+  DANGER: string
 }
 
 export const COLORS: ColorFormat = {
@@ -19,5 +20,6 @@ export const COLORS: ColorFormat = {
   GREEN: '#166619',
   ROSELLA: '#A40B5E',
   FANDANGO: ' #770944',
-  CANCEL: '#808080'
+  CANCEL: '#808080',
+  DANGER: '#C22B2B'
 }

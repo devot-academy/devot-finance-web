@@ -32,9 +32,15 @@ export const MenuItem = styled.div`
 
   &:hover {
     background-color: ${({ theme }) => theme.COLORS.PRIMARY_HOVER};
-    border-radius: 0.25rem;
-    padding: 0.5rem;
+    border-radius: 0.625rem;
   }
+`
+
+export const MenuIcon = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: default;
 `
 
 export const LinkContent = styled.div`
