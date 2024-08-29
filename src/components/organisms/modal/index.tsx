@@ -11,67 +11,84 @@ export type IModalRef = {
 
 type IModalProps = {
   title: string;
-  onSubmit: (form: { description: string; value: string; } ) => void;
+  onSubmit: (form: { description: string; value: string; }) => void;
+  variant?: 'default' | 'delete' | 'logout';
+  itemName?: string;
 }
 
-const Modal = forwardRef(function ModalForward({ title, onSubmit }: IModalProps, ref: Ref<IModalRef>) {
-  const [toggle, setToggle] = useState(false)
-  const [form, setForm] = useState({ 
-    description: '',
-    value: ''
-  })
+const Modal = forwardRef(function ModalForward(
+  { title, onSubmit, variant = 'default', itemName }: IModalProps, 
+  ref: Ref<IModalRef>
+) {
+  const [toggle, setToggle] = useState(false);
+  const [form, setForm] = useState({ description: '', value: '' });
 
-  function handleToggle () {
-    setToggle(curr => !curr)
-  }
+  const handleToggle = () => setToggle(curr => !curr);
 
-  function handleSubmit () {
-    onSubmit && onSubmit(form)
-    if (validation) handleToggle()
-  }
+  const handleSubmit = () => {
+    if (validation) {
+      onSubmit(form);
+      handleToggle();
+    }
+  };
 
   const validation = form.description !== '' && form.value !== '';
 
   useImperativeHandle(ref, () => ({
     stateModal: toggle,
     onToggle: handleToggle,
-  }), [toggle]
-
-)
+  }), [toggle]);
 
   if (!toggle) return null;
 
   return (
     <S.ModalOverlay>
-      <S.ModalContainer>
+      <S.ModalContainer variant={variant}>
         <S.ModalTitle>
-          <Text type={'headline-2'}>
-          {title}
-          </Text>
+          <Text type='headline-2'>{title}</Text>
         </S.ModalTitle>
-        <Text type={'headline-1'}>Descrição</Text>     
-        <Input 
-          type="text" 
-          placeholder="" 
-          onChange={(value) => setForm({ ...form, description: value})} 
-        />
-        <Text type={'headline-1'}>Valor mensal (R$)</Text>
-        <Input 
-          type="currency" 
-          placeholder="R$" 
-          onChange={(value) => setForm({ ...form, value})} 
-        />        
+
+        {variant === 'default' && (
+          <>
+            <Text type='headline-1'>Descrição</Text>
+            <Input
+              type="text"
+              placeholder="Digite a descrição"
+              onChange={value => setForm({ ...form, description: value })}
+            />
+            <Text type='headline-1'>Valor mensal (R$)</Text>
+            <Input
+              type="currency"
+              placeholder="R$"
+              onChange={value => setForm({ ...form, value })}
+            />
+          </>
+        )}
+
+        {variant === 'delete' && (
+          <Text type='body-1'>
+            Tem certeza que deseja remover o item <strong>{itemName}</strong>?
+          </Text>
+        )}
+
+        {variant === 'logout' && (
+          <Text type='body-1'>
+            Tem certeza que deseja sair?
+          </Text>
+        )}
+
         <S.ButtonContent>
-          <Button variant='cancel' onClick={handleToggle}>
-            Cancelar
-          </Button>
-          <Button variant={'default'} onClick={handleSubmit}>
-            Adicionar
+          <Button variant='cancel' onClick={handleToggle}>Não</Button>
+          <Button 
+            variant='danger'
+            onClick={handleSubmit}
+          >
+            {variant === 'delete' || variant === 'logout' ? 'Sim' : 'Adicionar'}
           </Button>
         </S.ButtonContent>
       </S.ModalContainer>
-      </S.ModalOverlay>
-  )
-})
+    </S.ModalOverlay>
+  );
+});
 
 export default Modal;

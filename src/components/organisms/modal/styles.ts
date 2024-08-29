@@ -13,7 +13,9 @@ export const ModalOverlay = styled.div`
   z-index: 999;
 `
 
-export const ModalContainer = styled.div`
+export const ModalContainer = styled.div<{
+  variant?: 'default' | 'delete' | 'logout'
+}>`
   position: fixed;
   top: 50%;
   left: 50%;
@@ -24,17 +26,33 @@ export const ModalContainer = styled.div`
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;
-  z-index: 1000;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  ${({ variant, theme }) =>
+    variant === 'delete' &&
+    `
+    height: 18rem;
+    width: 43.688rem;
+    h2 {
+      color: ${theme.COLORS.DANGER};
+    }
+  `}
+  ${({ variant, theme }) =>
+    variant === 'logout' &&
+    `
+    height: 18rem;
+    width: 43.688rem;
+    h2 {
+      color: ${theme.COLORS.PRIMARY};
+    }
+  `}
 `
 
 export const ModalTitle = styled.h2`
   font-family: ${({ theme }) => theme.FONTS.BODY};
   font-weight: ${({ theme }) => theme.FONTS.FONT_WEIGHTS.BOLD};
   font-size: 1.5rem;
-  color: ${({ theme }) => theme.COLORS.PRIMARY};
   text-align: center;
   margin-bottom: 2rem;
 `
