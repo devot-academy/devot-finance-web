@@ -1,17 +1,6 @@
 'use client'
-import styled from 'styled-components';
-import React from 'react';
+import FinanceComponent from "../../components/templates/finance"
 
-const Container = styled.div`
-  width: 100dvw;
-  height: 100dvh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: white;
-`
-
-export default function Test() {
-  return <Container>
-        </Container>;
-}
+export default function Home() {
+  return <FinanceComponent />
+};

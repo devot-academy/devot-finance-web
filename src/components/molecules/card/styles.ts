@@ -6,7 +6,7 @@ export const CardComponent = styled.div`
   padding: 1rem; 
   border-radius: 0.625rem; 
   display: flex; 
-  width: 50%;
+  width: 100%;
   justify-content: space-between;
 
 
