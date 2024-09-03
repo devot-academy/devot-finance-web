@@ -12,7 +12,7 @@ export const Container = styled.div`
 
 export const FormContent = styled.div`
   border-radius: 2rem;
-  padding: 3rem 8rem;
+  padding: 2rem 8rem;
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND};
   display: flex;
   flex-direction: column;
@@ -28,12 +28,12 @@ export const FinanceLogoContent = styled.div`
 `
 
 export const Title = styled.div`
-  margin-bottom: 4rem;
+  margin-bottom: 1.5rem;
   width: 100%;
 `
 
 export const Form = styled.div`
-  width: 100%;
+  width: 130%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -45,7 +45,7 @@ export const Label = styled.div`
 `
 
 export const ButtonContent = styled.div`
-  margin: 4rem auto;
+  margin: 1rem auto;
 `
 
 export const CreateAccountContent = styled.div`
@@ -71,5 +71,5 @@ export const LogoTextContent = styled.div`
 
 export const InputContent = styled.div`
   width: 100%;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 `
