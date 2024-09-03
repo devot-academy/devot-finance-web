@@ -3,7 +3,6 @@ import * as S from './styles';
 import Text from '../../atoms/text';
 import { ColorFormat } from '../../../styles/theme/colors';
 import Icon from '../../atoms/icon';
-import { FormContent } from '../../templates/createAccount/styles';
 
 export interface IlistProps {
   title: string;
@@ -11,8 +10,6 @@ export interface IlistProps {
   color?: keyof ColorFormat;
   onClick: () => void;
 }
-
-
 
 
 export default function List({ title, value, color = "BACKGROUND", onClick }: IlistProps) {
