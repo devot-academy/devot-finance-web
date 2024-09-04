@@ -29,7 +29,7 @@ export const LeftContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 100%; 
-  border: 2px solid #ccc;
+  
 `;
 
 export const RightContainer = styled.div`
@@ -37,7 +37,7 @@ export const RightContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   width: 100%; 
-  border: 2px solid #ccc;
+
 `;
 
 export const BalanceContainer = styled.div`
@@ -54,6 +54,7 @@ export const NonEssentialExpenses = styled.div`
   width: 100%;
   margin-bottom: 1rem;
   align-items: flex-end;
+  margin-top: 4rem;
 `;
 
 export const TotalExpenses = styled.div`
@@ -62,6 +63,7 @@ export const TotalExpenses = styled.div`
   width: 100%; 
   margin-top: 1rem; 
   align-items: flex-end;
+  margin-top: 2rem;
 `;
 
 export const EmergencyReserve = styled.div`
@@ -72,4 +74,5 @@ export const EmergencyReserve = styled.div`
   margin-top: 2rem; 
   padding-left: 2rem; 
   padding-right: 2rem;
+  margin-top: 4rem;
 `;
