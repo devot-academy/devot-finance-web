@@ -80,7 +80,7 @@ const Modal = forwardRef(function ModalForward(
         <S.ButtonContent>
           <Button variant='cancel' onClick={handleToggle}>Não</Button>
           <Button 
-            variant='danger'
+            variant={variant === 'delete' || variant === 'logout' ? 'danger' : 'default'}
             onClick={handleSubmit}
           >
             {variant === 'delete' || variant === 'logout' ? 'Sim' : 'Adicionar'}
