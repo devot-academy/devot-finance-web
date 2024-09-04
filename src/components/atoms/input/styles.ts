@@ -18,6 +18,6 @@ export const InputField = styled.input`
   }
 
   &::placeholder {
-    color: ${({ theme }) => theme.COLORS.PRIMARY};
+    color: ${({ theme }) => theme.COLORS.CANCEL};
   }
 `

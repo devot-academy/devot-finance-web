@@ -18,7 +18,7 @@ export const TopContent = styled.div`
 `
 
 export const NavMenu = styled.div`
-  margin-top: -30rem;
+  margin-top: -10rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;

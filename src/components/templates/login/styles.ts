@@ -33,7 +33,7 @@ export const Title = styled.div`
 `
 
 export const Form = styled.div`
-  width: 100%;
+  width: 130%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -52,7 +52,7 @@ export const CreateAccountContent = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-around;
 `
 
 export const LogoContent = styled.div`
