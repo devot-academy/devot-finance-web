@@ -1,5 +1,5 @@
 import React from "react";
-import FinancialSummary from "../../molecules/financeOverview";
+import FinanceOverview from "../../molecules/financeOverview";
 import Card from "../../molecules/card";
 import { MainContainer, LeftContainer, RightContainer, BalanceContainer, Title, ContainerWrapper, NonEssentialExpenses, TotalExpenses, EmergencyReserve } from './styles';
 import Text from "../../atoms/text";
@@ -12,16 +12,6 @@ function onClick() {
     console.log('Clicou!')
 }
 
-function parseCurrency(value: number): string {
-    const formatter = new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-        minimumFractionDigits: 2
-    });
-    const formattedValue = formatter.format(Math.abs(value));
-    const sign = value >= 0 ? '+' : '-';
-    return `${sign} ${formattedValue}`;
-}
 
 export default function FinanceTemplate() {
     return (
@@ -31,86 +21,33 @@ export default function FinanceTemplate() {
             </Title>
             <ContainerWrapper>
                 <LeftContainer>
-                    <Card title="Entradas" value={parseCurrency(1700.00)} color="GREEN" />
-                    <FinancialSummary title="Salário" value={parseCurrency(1200.00)} onClick={onClick} textColor="GREEN" />
-                    <FinancialSummary title="Vale-alimentação" value={parseCurrency(500.00)} onClick={onClick} textColor="GREEN" />
-                    <FinancialSummary title="Outros" value={parseCurrency(0.00)} onClick={onClick} textColor="GREEN" />
+                    <Card title="Entradas" value={1700.00} color="GREEN" />
+                    <FinanceOverview title="Salário" value={1200.00} onClick={onClick} textColor="GREEN" />
+                    <FinanceOverview title="Vale-alimentação" value={500.00} onClick={onClick} textColor="GREEN" />
+                    <FinanceOverview title="Outros" value={0.00} onClick={onClick} textColor="GREEN" />
                     <BalanceContainer>
-                        <Card title="Saldo" value={parseCurrency(1000.00)} color="GREEN" />
+                        <Card title="Saldo" value={1000.00} color="GREEN" />
                     </BalanceContainer>
                 </LeftContainer>
                 <RightContainer>
-                    <Card title="Despesas Essencial" value={parseCurrency(150.00)} color='ROSELLA' />
-                    <FinancialSummary title="Luz" value={parseCurrency(-100.00)} onClick={onClick} textColor="ROSELLA" />
-                    <FinancialSummary title="Água" value={parseCurrency(-50.00)} onClick={onClick} textColor="ROSELLA" />
+                    <Card title="Despesas Essencial" value={150.00} color='ROSELLA' />
+                    <FinanceOverview title="Luz" value={-100.00} onClick={onClick} textColor="ROSELLA" />
+                    <FinanceOverview title="Água" value={-50.00} onClick={onClick} textColor="ROSELLA" />
                     <NonEssentialExpenses>
-                        <Card title='Despesas Não Essencial' value={parseCurrency(400.00)} color='FANDANGO' />
-                        <FinancialSummary title="Lazer" value={parseCurrency(-400.00)} onClick={onClick} textColor="FANDANGO" />
-                        <FinancialSummary title='Canais de Streaming' value={parseCurrency(-50.00)} onClick={onClick} textColor="FANDANGO" />
+                        <Card title='Despesas Não Essencial' value={(400.00)} color='FANDANGO' />
+                        <FinanceOverview title="Lazer" value={-400.00} onClick={onClick} textColor="FANDANGO" />
+                        <FinanceOverview title='Canais de Streaming' value={-50.00} onClick={onClick} textColor="FANDANGO" />
                     </NonEssentialExpenses>
                     <TotalExpenses>
-                        <Card title='Total de Despesas' value={parseCurrency(600.00)} color='ROSELLA' />
+                        <Card title='Total de Despesas' value={600.00} color='ROSELLA' />
                     </TotalExpenses>
                 </RightContainer>
             </ContainerWrapper>
             <EmergencyReserve>
-                <Card title="Reversa emergencia ideal" value={parseCurrency(7200.00)} color="PRIMARY" />
+                <Card title="Reversa emergencia ideal" value={7200.00} color="PRIMARY" />
             </EmergencyReserve>
         </MainContainer>
     )
 }
-
-
- /* export
-<RightContainer>
-<Card title="Despesas Essencial" value={parseCurrency(150.00)} color='ROSELLA' />
-<List title="Luz" value={parseCurrency(-100.00)} onClick={onClick} />
-<List title="Água" value={parseCurrency(-50.00)} onClick={onClick} />
-<NonEssentialExpenses>
-<Card title='Despesas Não Essencial' value={parseCurrency(400.00)} color='FANDANGO' />
-<List title="Lazer" value={parseCurrency(-400.00)} onClick={onClick} />
-<List title='Canais de Streaming' value={parseCurrency(-50.00)} onClick={onClick} />
-</NonEssentialExpenses>
-<TotalExpenses> 
-<Card title='Total de Despesas' value={parseCurrency(600.00)} color='ROSELLA' />
-</TotalExpenses> 
-</RightContainer>
-</ContainerWrapper>
-<BalanceContainer>
-<Card title="Saldo" value={parseCurrency(1000.00)} color="GREEN" />
-</BalanceContainer>
-<EmergencyReserve>
-<Card title="Reversa emergencia ideal" value={parseCurrency(7200.00)} color="PRIMARY" />
-</EmergencyReserve>
-
-/*export  default function financeTemplate(){
-    return (
-    <MainContainer>
-      <LeftContainer>
-        <Card title="Entradas" value={parseCurrency(1700.00)} color="GREEN"/>
-        <List title="Salário" value={parseCurrency(1200.00)} onClick={onClick}/>
-        <List title="Vale-alimentação" value={parseCurrency(500.00)} onClick={onClick}/>
-        <BalanceContainer>
-        <Card title="Saldo" value={parseCurrency(1000.00)} color="GREEN"/>
-        </BalanceContainer>
-      </LeftContainer>
-        <RightContainer>
-        <Card title="Despesas Essencial" value={parseCurrency(150.00)} color='ROSELLA' />
-        <List title="Luz" value={parseCurrency(-100.00)} onClick={onClick} />
-        <List title="Água" value={parseCurrency(-50.00)} onClick={onClick}/>
-        <Card title='Despesas Não Essencial' value={parseCurrency(400.00 )}color='FANDANGO' />
-        <List title="Lazer" value={parseCurrency(-400.00)}onClick={onClick}/>
-        <List title='Canais de Stremens' value={parseCurrency(-50.00) }onClick={onClick} />
-        <Card title='Total de Despesas' value={parseCurrency(600.00)} color='ROSELLA' />
-      </RightContainer>
-      <BottomCardContainer>
-        <Card title="Reserva de Emergencia Ideal" value={parseCurrency(7200.00 )}color="PRIMARY" />
-      </BottomCardContainer>
-    </MainContainer>
-
-    );
-
-    
-}*/
 
 
