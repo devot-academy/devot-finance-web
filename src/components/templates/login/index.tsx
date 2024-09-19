@@ -32,7 +32,7 @@ export default function LoginTemplate() {
                         </S.Label>
                         <Input 
                             type="email" 
-                            placeholder="Digite seu e-email" 
+                            placeholder="Digite seu e-mail" 
                             value={form.email}
                             onChange={(value) => setForm({
                                 ...form,
