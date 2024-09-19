@@ -6,17 +6,21 @@ import Input from '../../atoms/input';
 import Button from '../../molecules/button';
 import Link from '../../molecules/link';
 
-export default function CreateAccountTemplate() {
+type ICreateAccountTemplate = {
+    onSubscribe: (arg0: { email: string; password: string; name: string}) => void;
+}
+export default function CreateAccountTemplate(props: ICreateAccountTemplate) {
+    const { onSubscribe } = props
     const [form, setForm] = useState({ 
-        fullName: "", 
+        name: "", 
         email: "", 
         password: "", 
         confirmPassword: "" 
     });
 
     const handleSubmit = () => {
-        const { fullName, email, password, confirmPassword } = form;
-        if (fullName === "" || email === "" || password === "" || confirmPassword === "") {
+        const { name, email, password, confirmPassword } = form;
+        if (name === "" || email === "" || password === "" || confirmPassword === "") {
             alert("Erro: Todos os campos devem ser preenchidos");
             return;
         }
@@ -24,7 +28,8 @@ export default function CreateAccountTemplate() {
             alert("Erro: As senhas não coincidem");
             return;
         }
-        console.log({ fullName, email, password });
+        onSubscribe({ name, email, password })
+        console.log({ name, email, password });
     }
 
     return (
@@ -45,8 +50,8 @@ export default function CreateAccountTemplate() {
                         <Input 
                             type="text" 
                             placeholder="Digite seu nome completo" 
-                            value={form.fullName}
-                            onChange={(value) => setForm({ ...form, fullName:value })}
+                            value={form.name}
+                            onChange={(value) => setForm({ ...form, name:value })}
                         />
                     </S.InputContent>
                     <S.InputContent>
