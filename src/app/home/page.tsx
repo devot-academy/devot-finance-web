@@ -1,6 +1,8 @@
 'use client'
-import FinanceComponent from "../../components/templates/finance"
+
+import React from 'react';
+import HomeTemplate from "../../components/templates/home"
 
 export default function Home() {
-  return <FinanceComponent />
+  return <HomeTemplate  />
 };
