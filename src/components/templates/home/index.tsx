@@ -53,7 +53,7 @@ export default function HomeTemplate({
       <Modal
         ref={modalNovaEntradaRef}
         title="Nova entrada"
-        variant="logout"
+        variant="default"
         onSubmit={(form) => {
           console.log('Nova Entrada: ', form);
         }}
