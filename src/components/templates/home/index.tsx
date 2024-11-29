@@ -14,11 +14,22 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export default function HomeTemplate({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+type IHomeTemplateProps = {
+  onSubscribe: (formData: {
+    description: string;
+    value: number;
+    type: number;
+    userId: number;
+  }) => void;
+};
+
+const TRANSACTION_TYPES = {
+  BALANCE: 1,
+  ESSENTIAL: 2,
+  SUPERFLUOUS: 3,
+};
+
+export default function HomeTemplate({ onSubscribe }: IHomeTemplateProps) {
   const modalNovaEntradaRef = useRef<IModalRef>(null);
   const modalDespesaEssencialRef = useRef<IModalRef>(null);
   const modalDespesaNaoEssencialRef = useRef<IModalRef>(null);
@@ -49,31 +60,74 @@ export default function HomeTemplate({
           },
         ]}
       />
-      {children}
+
+      {/* Modal Nova Entrada */}
       <Modal
         ref={modalNovaEntradaRef}
         title="Nova entrada"
         variant="default"
         onSubmit={(form) => {
-          console.log('Nova Entrada: ', form);
+          const formData = {
+            description: form.description.trim(),
+            value: parseFloat(form.value),
+            type: TRANSACTION_TYPES.BALANCE, // Tipo correspondente para Nova Entrada
+            userId: 1,
+          };
+
+          if (isNaN(formData.value)) {
+            alert('Erro: Valor inválido.');
+            return;
+          }
+
+          onSubscribe(formData);
         }}
       />
+
+      {/* Modal Nova Despesa Essencial */}
       <Modal
         ref={modalDespesaEssencialRef}
         title="Nova Despesa Essencial"
         variant="default"
         onSubmit={(form) => {
-          console.log('Nova Despesa Essencial: ', form);
+          const formData = {
+            description: form.description.trim(),
+            value: parseFloat(form.value),
+            type: TRANSACTION_TYPES.ESSENTIAL, // Tipo correspondente para Despesa Essencial
+            userId: 1,
+          };
+
+          if (isNaN(formData.value)) {
+            alert('Erro: Valor inválido.');
+            return;
+          }
+
+          onSubscribe(formData);
         }}
       />
+
+      {/* Modal Nova Despesa Não Essencial */}
       <Modal
         ref={modalDespesaNaoEssencialRef}
         title="Nova Despesa Não Essencial"
         variant="default"
         onSubmit={(form) => {
-          console.log('Nova Despesa Não Essencial: ', form);
+          const formData = {
+            description: form.description.trim(),
+            value: parseFloat(form.value),
+            type: TRANSACTION_TYPES.SUPERFLUOUS, // Tipo correspondente para Despesa Não Essencial
+            userId: 1,
+          };
+
+          if (isNaN(formData.value)) {
+            alert('Erro: Valor inválido.');
+            return;
+          }
+
+          onSubscribe(formData);
         }}
       />
+
+      {/* Exibe o template de finanças */}
       <FinanceTemplate />
     </Container>
   );

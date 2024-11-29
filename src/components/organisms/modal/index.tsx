@@ -1,4 +1,4 @@
-import React, { forwardRef, Ref, useState, useImperativeHandle } from 'react';
+import React, { forwardRef, Ref, useState, useImperativeHandle, useEffect } from 'react';
 import * as S from './styles';
 import Text from '../../atoms/text';
 import Input from '../../atoms/input';
@@ -7,14 +7,17 @@ import Button from '../../molecules/button';
 export type IModalRef = {
   stateModal: boolean;
   onToggle: () => void;
-}
+};
 
 type IModalProps = {
   title: string;
-  onSubmit: (form: { description: string; value: string; }) => void;
+  onSubmit: (form: {
+    description: string;
+    value: string; 
+  }) => void;
   variant?: 'default' | 'delete' | 'logout';
   itemName?: string;
-}
+};
 
 const Modal = forwardRef(function ModalForward(
   { title, onSubmit, variant = 'default', itemName }: IModalProps, 
@@ -32,12 +35,22 @@ const Modal = forwardRef(function ModalForward(
     }
   };
 
-  const validation = form.description !== '' && form.value !== '';
+  const validation = form.description.trim() !== '' && form.value.trim() !== '';
 
   useImperativeHandle(ref, () => ({
     stateModal: toggle,
     onToggle: handleToggle,
   }), [toggle]);
+
+  // Adiciona foco ao abrir o modal
+  useEffect(() => {
+    if (toggle) {
+      const input = document.querySelector('input');
+      if (input) {
+        input.focus();
+      }
+    }
+  }, [toggle]);
 
   if (!toggle) return null;
 
@@ -60,7 +73,7 @@ const Modal = forwardRef(function ModalForward(
             <Input
               type="currency"
               placeholder="R$"
-              onChange={value => setForm({ ...form, value })}
+              onChange={value => setForm({ ...form, value })} // Aqui você pode considerar transformar o valor em um formato apropriado
             />
           </>
         )}
