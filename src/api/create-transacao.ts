@@ -9,7 +9,7 @@ type ICreateTransaction = {
 
 export async function createTransaction(data: ICreateTransaction) {
   try {
-    const token ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhaXNzYXRrbTE3QGdtYWlsLmNvbSIsImlhdCI6MTczMjgyMDQ1MiwiZXhwIjoxNzMzNDI1MjUyfQ.t--vVfUZeqX_ptR68hMqpRflWcVU26i0wWMxfaeBmTQ"; // Substitua pelo token real
+    const token =""; 
     const response = await axios.post('http://localhost:3001/transaction', data, {
       headers: {
         'Authorization': `Bearer ${token}`, 

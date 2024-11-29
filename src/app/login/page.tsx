@@ -1,14 +1,16 @@
-'use client'
+'use client';
 
-import { useRouter } from 'next/navigation'
-import LoginTemplate from '../../components/templates/login'
+import { useRouter } from 'next/navigation';
+import LoginTemplate from '../../components/templates/login';
 
 export default function LoginPage() {
-  const router = useRouter()
+  const router = useRouter();
 
   const handleSuccessLogin = () => {
-    router.push('/home')
-  }
+    router.push('/home'); 
+  };
 
-  return <LoginTemplate onSuccess={handleSuccessLogin} />
+  return (
+    <LoginTemplate onSuccess={handleSuccessLogin} />
+  );
 }
