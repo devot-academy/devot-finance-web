@@ -1,10 +1,13 @@
-'use client';
+'use client'
 
-import { useRef } from 'react';
-import SideBar from '../../../components/organisms/sideBar';
-import Modal, { IModalRef } from '../../../components/organisms/modal';
-import FinanceTemplate from '../finance';
-import { styled } from 'styled-components';
+import React, { useEffect, useRef, useState } from 'react'
+import { useRouter } from 'next/navigation'
+import SideBar from '../../../components/organisms/sideBar'
+import Modal, { IModalRef } from '../../../components/organisms/modal'
+import FinanceTemplate from '../finance'
+import { styled } from 'styled-components'
+import { getToken } from '../../../services/storage'
+import { logout } from '../../../services/authService'
 
 const Container = styled.div`
   width: 100dvw;
@@ -12,7 +15,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`;
+`
 
 type IHomeTemplateProps = {
   onSubscribe: (formData: {
@@ -38,26 +41,29 @@ export default function HomeTemplate({ onSubscribe }: IHomeTemplateProps) {
     <Container>
       <SideBar
         userName=""
-        onLogout={() => {}}
+        onLogout={() => {
+          logout()
+          router.push('/login')
+        }}
         menuOptions={[
           {
             name: 'Nova entrada',
             onClick: () => {
-              modalNovaEntradaRef.current?.onToggle();
-            },
+              modalNovaEntradaRef.current?.onToggle()
+            }
           },
           {
             name: 'Nova despesa essencial',
             onClick: () => {
-              modalDespesaEssencialRef.current?.onToggle();
-            },
+              modalDespesaEssencialRef.current?.onToggle()
+            }
           },
           {
             name: 'Nova despesa não essencial',
             onClick: () => {
-              modalDespesaNaoEssencialRef.current?.onToggle();
-            },
-          },
+              modalDespesaNaoEssencialRef.current?.onToggle()
+            }
+          }
         ]}
       />
 
@@ -130,5 +136,5 @@ export default function HomeTemplate({ onSubscribe }: IHomeTemplateProps) {
       {/* Exibe o template de finanças */}
       <FinanceTemplate />
     </Container>
-  );
+  )
 }
