@@ -9,13 +9,7 @@ type ICreateTransaction = {
 
 export async function createTransaction(data: ICreateTransaction) {
   try {
-    const token =""; 
-    const response = await axios.post('http://localhost:3001/transaction', data, {
-      headers: {
-        'Authorization': `Bearer ${token}`, 
-        'Content-Type': 'application/json',
-      },
-    });
+    const response = await axios.post('http://localhost:3001/transaction', data);
     return response.data;
   } catch (error) {
     console.error('Erro ao criar a transação:', error);
