@@ -15,25 +15,18 @@ type IModalProps = {
     description: string;
     value: string;
   }) => void;
-  onSubscribe?: (formData: {
-    description: string;
-    value: number;
-    type: number;
-    userId: number;
-  }) => void;
   variant?: 'default' | 'delete' | 'logout';
   itemName?: string;
 };
 
 const Modal = forwardRef(function ModalForward(
-  { title, onSubmit, onSubscribe, variant = 'default', itemName }: IModalProps,
+  { title, onSubmit, variant = 'default', itemName }: IModalProps,
   ref: Ref<IModalRef>
 ) {
   const [toggle, setToggle] = useState(false);
   const [form, setForm] = useState({
     description: '',
     value: '',
-    type: '0', 
   });
 
   const handleToggle = () => setToggle(curr => !curr);
@@ -46,23 +39,13 @@ const Modal = forwardRef(function ModalForward(
   };
 
   const handleSubmit = () => {
-    if (validation) {
-      if (onSubscribe) {
-        const formData = {
-          description: form.description.trim(),
-          value: parseInt(form.type.replace(/\D/g, ''), 10) || 0, 
-          type: parseFloat(form.value),
-          userId: 1, 
-        };
-        onSubscribe(formData);
+    if (form.value && form.description) {
+        onSubmit(form);
+        handleToggle()
       } else {
-        onSubmit({ description: form.description.trim(), value: form.value.trim() });
+        alert("Campos preenchidos incorrete")
       }
-      handleToggle();
-    }
   };
-
-  const validation = form.description.trim() !== '' && form.value.trim() !== '' && !isNaN(parseFloat(form.value));
 
   useImperativeHandle(
     ref,

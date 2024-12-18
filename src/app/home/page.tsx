@@ -15,6 +15,7 @@ export default function Home() {
     type: number;
     userId: number;
   }) => {
+    console.log("handleCreateTransaction", formData)
     try {
       const response = await createTransaction(formData)
       console.log('Transação criada com sucesso:', response);

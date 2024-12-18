@@ -1,13 +1,13 @@
-'use client'
+'use client';
 
-import React, { useEffect, useRef, useState } from 'react'
-import { useRouter } from 'next/navigation'
-import SideBar from '../../../components/organisms/sideBar'
-import Modal, { IModalRef } from '../../../components/organisms/modal'
-import FinanceTemplate from '../finance'
-import { styled } from 'styled-components'
-import { getToken } from '../../../services/storage'
-import { logout } from '../../../services/authService'
+import React, { useRef, useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import SideBar from '../../../components/organisms/sideBar';
+import Modal, { IModalRef } from '../../../components/organisms/modal';
+import FinanceTemplate from '../finance';
+import { styled } from 'styled-components';
+import { logout } from '../../../services/authService';
+import { createTransaction, getTransaction } from '../../../services/transactionService';
 
 const Container = styled.div`
   width: 100dvw;
@@ -15,7 +15,7 @@ const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-`
+`;
 
 type IHomeTemplateProps = {
   onSubscribe: (formData: {
@@ -33,108 +33,105 @@ const TRANSACTION_TYPES = {
 };
 
 export default function HomeTemplate({ onSubscribe }: IHomeTemplateProps) {
+  const router = useRouter();
   const modalNovaEntradaRef = useRef<IModalRef>(null);
   const modalDespesaEssencialRef = useRef<IModalRef>(null);
   const modalDespesaNaoEssencialRef = useRef<IModalRef>(null);
+
+  const [transactions, setTransactions] = useState([]);
+
+  useEffect(() => {
+    const loadTransactions = async () => {
+      try {
+        const data = await getTransaction();
+        setTransactions(data);
+      } catch (error) {
+        console.error('Erro ao carregar transações:', error);
+      }
+    };
+    loadTransactions();
+  }, []);
+
+  const handleSubmit = async (
+    form: { description: string; value: string },
+    type: number
+  ) => {
+    const valueWithoutCurrency = form.value.replace('R$ ', '');
+    const valueToFloatString = valueWithoutCurrency.replace(',', '.');
+    const valueConvertedToNumber = parseFloat(valueToFloatString);
+
+    if (isNaN(valueConvertedToNumber)) {
+      alert('Erro: Valor inválido.');
+      return;
+    }
+
+    const transactionData = {
+      description: form.description,
+      value: valueConvertedToNumber,
+      type,
+      userId: 22, 
+    };
+
+    try {
+      await createTransaction(transactionData);
+      alert('Transação criada com sucesso!');
+      const updatedTransactions = await getTransaction();
+      setTransactions(updatedTransactions);
+    } catch (error) {
+      console.error('Erro ao criar transação:', error);
+      alert('Erro ao criar transação.');
+    }
+  };
 
   return (
     <Container>
       <SideBar
         userName=""
         onLogout={() => {
-          logout()
-          router.push('/login')
+          logout();
+          router.push('/login');
         }}
         menuOptions={[
           {
             name: 'Nova entrada',
             onClick: () => {
-              modalNovaEntradaRef.current?.onToggle()
-            }
+              modalNovaEntradaRef.current?.onToggle();
+            },
           },
           {
             name: 'Nova despesa essencial',
             onClick: () => {
-              modalDespesaEssencialRef.current?.onToggle()
-            }
+              modalDespesaEssencialRef.current?.onToggle();
+            },
           },
           {
             name: 'Nova despesa não essencial',
             onClick: () => {
-              modalDespesaNaoEssencialRef.current?.onToggle()
-            }
-          }
+              modalDespesaNaoEssencialRef.current?.onToggle();
+            },
+          },
         ]}
       />
-
-      {/* Modal Nova Entrada */}
       <Modal
         ref={modalNovaEntradaRef}
         title="Nova entrada"
         variant="default"
-        onSubmit={(form) => {
-          const formData = {
-            description: form.description.trim(),
-            value: parseFloat(form.value),
-            type: TRANSACTION_TYPES.BALANCE, // Tipo correspondente para Nova Entrada
-            userId: 1,
-          };
-
-          if (isNaN(formData.value)) {
-            alert('Erro: Valor inválido.');
-            return;
-          }
-
-          onSubscribe(formData);
-        }}
+        onSubmit={(form) => handleSubmit(form, TRANSACTION_TYPES.BALANCE)}
       />
-
-      {/* Modal Nova Despesa Essencial */}
       <Modal
         ref={modalDespesaEssencialRef}
         title="Nova Despesa Essencial"
         variant="default"
-        onSubmit={(form) => {
-          const formData = {
-            description: form.description.trim(),
-            value: parseFloat(form.value),
-            type: TRANSACTION_TYPES.ESSENTIAL, // Tipo correspondente para Despesa Essencial
-            userId: 1,
-          };
-
-          if (isNaN(formData.value)) {
-            alert('Erro: Valor inválido.');
-            return;
-          }
-
-          onSubscribe(formData);
-        }}
+        onSubmit={(form) => handleSubmit(form, TRANSACTION_TYPES.ESSENTIAL)}
       />
-
-      {/* Modal Nova Despesa Não Essencial */}
       <Modal
         ref={modalDespesaNaoEssencialRef}
         title="Nova Despesa Não Essencial"
         variant="default"
-        onSubmit={(form) => {
-          const formData = {
-            description: form.description.trim(),
-            value: parseFloat(form.value),
-            type: TRANSACTION_TYPES.SUPERFLUOUS, // Tipo correspondente para Despesa Não Essencial
-            userId: 1,
-          };
-
-          if (isNaN(formData.value)) {
-            alert('Erro: Valor inválido.');
-            return;
-          }
-
-          onSubscribe(formData);
-        }}
+        onSubmit={(form) => handleSubmit(form, TRANSACTION_TYPES.SUPERFLUOUS)}
       />
 
-      {/* Exibe o template de finanças */}
-      <FinanceTemplate />
+      <FinanceTemplate transactions={transactions} />
     </Container>
-  )
+  );
 }
